@@ -73,7 +73,12 @@ public class Generate_Bill {
         List<String> foodItems = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
+            boolean isFirstLine = true;
             while ((line = br.readLine()) != null) {
+                if (isFirstLine) { // Skip the first line (header)
+                    isFirstLine = false;
+                    continue;
+                }
                 String[] parts = line.split(",");
                 if (parts.length > 0){
                     foodItems.add(parts[0].trim());
@@ -88,7 +93,12 @@ public class Generate_Bill {
     private static double getPriceForItem(String item) throws FileNotFoundException {
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
             String line;
+            boolean isFirstLine = true; // Flag to track if it's the first line
             while ((line = br.readLine()) != null) {
+                if (isFirstLine) { // Skip the first line (header)
+                    isFirstLine = false;
+                    continue;
+                }
                 String[] parts = line.split(","); // Split the line by comma
                 if (parts.length > 1 && parts[0].trim().equalsIgnoreCase(item)) {
                     // Check if the first part matches the item and if there's a price at index 1
@@ -101,4 +111,5 @@ public class Generate_Bill {
         // Return a default price if item is not found or there's an error reading the file
         return 0.0; // Or any other default value you prefer
     }
+
 }
