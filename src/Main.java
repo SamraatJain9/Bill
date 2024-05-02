@@ -1,4 +1,3 @@
-// Main.java
 package src;
 
 import src.assets.Generate_Bill;
