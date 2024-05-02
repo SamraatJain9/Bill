@@ -2,34 +2,36 @@ package src;
 
 import src.assets.Generate_Bill;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        displayMenu(); // Display the initial menu
-    }
+        JFrame frame = new JFrame();
 
-    private static void displayMenu() throws FileNotFoundException {
-        Scanner scanner = new Scanner(System.in);
-        boolean exit = false;
-        do {
-            System.out.println("Menu:");
-            System.out.println("1. Generate Bill");
-            System.out.println("2. Exit");
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    Generate_Bill.generateBill();
-                    break;
-                case 2:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please enter a valid option.");
-            }
-        } while (!exit);
-        System.out.println("Exiting the program. Thank you!");
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("A menu");
+
+        JMenuItem menuItem1 = new JMenuItem("Text");
+        menu.add(menuItem1);
+
+        JMenuItem menuItem2 = new JMenuItem("Images");
+        menu.add(menuItem2);
+
+        menu.addSeparator();
+        JRadioButtonMenuItem menuItem3 = new JRadioButtonMenuItem("Files");
+        menu.add(menuItem3);
+
+        JRadioButtonMenuItem menuItem4 = new JRadioButtonMenuItem("Folders");
+        menu.add(menuItem4);
+
+        menuBar.add(menu);
+        frame.setJMenuBar(menuBar);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400);
+        frame.setVisible(true);
     }
 }
